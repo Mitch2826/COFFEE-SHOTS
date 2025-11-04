@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 from flask_migrate import Migrate
 from db.database import db
 from db.config import DATABASE_URL
@@ -26,9 +26,8 @@ def home():
 
 @app.route('/customers')
 def fetch_all_customers():
-    customers = get_all_customers()
-    print(customers)
-    return {"customers": [customer.__dict__ for customer in customers]}
+    customers = jsonify(get_all_customers())
+    return customers
 
 
 # run the app
